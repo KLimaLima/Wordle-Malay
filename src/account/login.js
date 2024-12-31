@@ -137,7 +137,7 @@ loginRouter.route('/login')
             res.status(400).send('Unable to change password')
             return
         }
-        res.status(200).send(`Password for user ${account_to_change} changed\n`, message_role_change)
+        res.status(200).send(`Password for user ${account_to_change} changed\n${message_role_change}`)
     })
     .delete(verify_jwt, async (req, res) => {
 
