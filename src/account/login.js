@@ -85,15 +85,15 @@ loginRouter.route('/login')
 
         let account_to_change = res.locals.jwt_data.username
 
-        if(username && req_user.role == 'admin') {
-            account_to_change = username
-        }
-
         let req_user = await account.findOne(
             {
                 username: res.locals.jwt_data.username
             }
         )
+
+        if(username && req_user.role == 'admin') {
+            account_to_change = username
+        }
 
         let message_role_change = 'Do not share your password'
 
@@ -149,8 +149,10 @@ loginRouter.route('/login')
             }
         )
 
+        //first by default all will delete self
         to_delete = res.locals.jwt_data.username
 
+        //only if have username and admin change to delete selected user
         if(username && req_user.role == 'admin') {
 
             to_delete = username
