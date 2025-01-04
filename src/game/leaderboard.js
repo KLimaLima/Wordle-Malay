@@ -7,7 +7,7 @@ const { jwt_search } = require('../utils/jwt-search.js');
 const { verify_jwt } = require('../utils/verify-jwt.js');
 const { input_word } = require('../utils/input-word.js');
 
-leaderboardRouter.get('/leaderboard', verify_jwt, jwt_search, input_word, async(req, res) => {
+leaderboardRouter.get('/leaderboard', verify_jwt, jwt_search, async(req, res) => {
 
     let total_tries_1 = await game_data.countDocuments(
         {
