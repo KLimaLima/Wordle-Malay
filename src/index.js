@@ -6,6 +6,7 @@ let client = require('./db/database')
 
 const { day_interval } = require('./server/day-interval')
 const { insert_random } = require('./server/insert-random')
+const { delete_all_gamedata } = require('./server/delete-all-gamedata')
 
 app.use(express.json())
 
@@ -27,8 +28,12 @@ app.use((req, res) => {
 
 // daily_word()
 if(day_interval()) {
+  
   //randomly pick a new word
   insert_random()
+
+  //delete yesterday's game data
+  delete_all_gamedata()
 }
 
 app.listen(port, () => {
