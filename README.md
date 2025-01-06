@@ -1,2 +1,2 @@
 # Wordle-Malay
-Wordle game but malay and with a few twist
+A simple Wordle game in malay
