@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 let client = require('./db/database')
-let { limiter } = require('./utils/rate-limit')
+let limiter = require('./utils/rate-limit')
 
 const { day_interval } = require('./server/day-interval')
 const { insert_random } = require('./server/insert-random')
