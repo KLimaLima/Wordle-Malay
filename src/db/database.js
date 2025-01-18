@@ -13,7 +13,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 // });
 
 //use cert
-const credentials = 'X509-cert-7061121549959574058.pem'
+const credentials = `${process.env.CERT}`
 
 const client = new MongoClient('mongodb+srv://clusterwordlemalay.wytow.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=ClusterWordleMalay', {
   tlsCertificateKeyFile: credentials,
