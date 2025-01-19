@@ -18,6 +18,9 @@ const word_listRouter = require('./word/edit')
 const today_wordRouter = require('./word/today')
 const gameRouter = require('./game/game')
 const ipRouter = require('./utils/ip-route')
+=======
+const ipRouter = require('./dev/ip-route')
+>>>>>>> Stashed changes
 const leaderboardRouter = require('./game/leaderboard')
 
 app.use('/account', registerRouter)

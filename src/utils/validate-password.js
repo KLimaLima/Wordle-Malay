@@ -7,7 +7,11 @@ const PASSWORD_POLICY = {
     REQUIRE_NUMBER: true,
     REQUIRE_SPECIAL: true,
     REQUIRE_UPPER_LOWER: true
-}
+};
+
+const MAX_ATTEMPTS = 5;
+const BLOCK_DURATION_MS = 5 * 60 * 1000; // 5 minute
+const failedAttempts = new Map();
 
 function validatePasswordPolicy(password) {
 
@@ -56,7 +60,7 @@ function enforcePasswordPolicy(req, res, next) {
 
 function validate_password(req, res, next) {
 
-    let { password } = req.body
+    let { username, password } = req.body;
 
     //check if username exist in database
     if(!res.locals.user_exist) {
@@ -65,16 +69,40 @@ function validate_password(req, res, next) {
     }
 
     //check if client gave password
-    if(!password) {
-        res.status(400).send('Please enter a password')
+    if(!username || !password) {
+        res.status(400).send('Please enter username and password')
         return
     }
 
-    //check if the password given same as password in database
-    if(!(bcrypt.compareSync(password, res.locals.account.password))) {
-        res.status(400).send('Password is incorrect')
-        return
+    // Retrieve failed attempts for this user
+    const userAttempts = failedAttempts.get(username) || { count: 0, blockedUntil: null };
+
+    // Check if the user is blocked
+    if (userAttempts.blockedUntil && Date.now() < userAttempts.blockedUntil) {
+        const timeLeft = Math.ceil((userAttempts.blockedUntil - Date.now()) / 1000);
+        res.status(403).send(`Account is blocked. Try again in ${timeLeft} seconds.`);
+        return;
     }
+
+    // Validate password
+    if (!bcrypt.compareSync(password, res.locals.account.password)) {
+        userAttempts.count += 1;
+
+        if (userAttempts.count >= MAX_ATTEMPTS) {
+            userAttempts.blockedUntil = Date.now() + BLOCK_DURATION_MS; // Block the user
+            userAttempts.count = 0; // Reset count after blocking
+            failedAttempts.set(username, userAttempts);
+            res.status(403).send('Too many failed attempts. Account is blocked for 5 minutes.');
+        } else {
+            failedAttempts.set(username, userAttempts);
+            res.status(401).send(`Incorrect password. You have ${MAX_ATTEMPTS - userAttempts.count} attempts left.`);
+        }
+
+        return;
+    }
+
+    // Reset attempts on successful login
+    failedAttempts.delete(username);
 
     next()
 }
