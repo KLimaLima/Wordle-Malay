@@ -11,7 +11,7 @@ const { day_interval } = require('./server/day-interval')
 const { insert_random } = require('./server/insert-random')
 const { delete_all_gamedata } = require('./server/delete-all-gamedata')
 
-app.set('trust proxy', `${process.env.PROXY}`) // azure ada macam proxy so kena buat ni
+app.set('trust proxy', process.env.PROXY) // azure ada macam proxy so kena buat ni
 
 app.use(express.json())
 app.use(limiter)
