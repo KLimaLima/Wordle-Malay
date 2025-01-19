@@ -13,11 +13,11 @@ const { delete_all_gamedata } = require('./server/delete-all-gamedata')
 
 const { ip_addr } = require('./db/client');
 
-let proxy_num = await ip_addr.findOne(
-  {
-    parameter: 'proxy_num'
-  }
-)
+// let proxy_num = await ip_addr.findOne(
+//   {
+//     parameter: 'proxy_num'
+//   }
+// )
 
 app.set('trust proxy', true)//proxy_num.num)
 
