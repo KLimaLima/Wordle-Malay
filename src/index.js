@@ -9,6 +9,20 @@ const { day_interval } = require('./server/day-interval')
 const { insert_random } = require('./server/insert-random')
 const { delete_all_gamedata } = require('./server/delete-all-gamedata')
 
+/////////////////////////////////////////////////////////////////////////////
+
+const { ip_addr } = require('./db/client');
+
+let proxy_num = await ip_addr.findOne(
+  {
+    parameter: 'proxy_num'
+  }
+)
+
+app.set('trust proxy', true)//proxy_num.num)
+
+/////////////////////////////////////////////////////////////////////////////
+
 app.use(express.json())
 app.use(limiter)
 
@@ -17,7 +31,8 @@ const loginRouter = require('./account/login')
 const word_listRouter = require('./word/edit')
 const today_wordRouter = require('./word/today')
 const gameRouter = require('./game/game')
-const ipRouter = require('./utils/ip-route')
+const ipRouter = require('./dev/ip-route')
+const proxyNum = require('./dev/proxy-num')
 const leaderboardRouter = require('./game/leaderboard')
 
 app.use('/account', registerRouter)
@@ -26,6 +41,7 @@ app.use('/word', word_listRouter)
 app.use('/word', today_wordRouter)
 app.use('/', gameRouter)
 app.use('/', ipRouter)
+app.use('/', proxyNum)
 app.use('/', leaderboardRouter)
 
 app.use((req, res) => {

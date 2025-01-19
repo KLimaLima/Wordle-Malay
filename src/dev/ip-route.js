@@ -1,7 +1,7 @@
 const express = require("express");
 const ipRouter = express.Router();
 
-ipRouter.route('/ip')
+ipRouter.route('/dev/ip')
     .get( async (req, res) => {
         res.status(200).send(req.ip);
     });
