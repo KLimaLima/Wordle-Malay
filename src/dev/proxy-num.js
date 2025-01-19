@@ -1,9 +1,9 @@
 const express = require("express");
-const ipRouter = express.Router();
+const proxyNum = express.Router();
 
 const { ip_addr } = require('../db/client');
 
-ipRouter.route('/dev/proxy_num')
+proxyNum.route('/dev/proxy_num')
     .post( async (req, res) => {
 
         let change = ip_addr.updateOne(
@@ -19,4 +19,4 @@ ipRouter.route('/dev/proxy_num')
         res.status(200).send(req.ip);
     });
 
-module.exports = ipRouter;
+module.exports = proxyNum;
