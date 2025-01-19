@@ -1,21 +1,10 @@
 require('dotenv').config();
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clusterwordlemalay.wytow.mongodb.net/?retryWrites=true&w=majority&appName=ClusterWordleMalay`;
 
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// const client = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   }
-// });
-
-//use cert
 const credentials = `${process.env.CERT}`
 
-const client = new MongoClient('mongodb+srv://clusterwordlemalay.wytow.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=ClusterWordleMalay', {
+const client = new MongoClient(`mongodb+srv://${process.env.MDB_URL1}.wytow.mongodb.net/?authSource=%24external&authMechanism=${process.env.AUTH_MECH}&retryWrites=true&w=majority&appName=${process.env.MDB_URL2}`, {
   tlsCertificateKeyFile: credentials,
   serverApi: ServerApiVersion.v1
 });
