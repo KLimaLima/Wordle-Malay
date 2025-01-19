@@ -9,6 +9,8 @@ const { day_interval } = require('./server/day-interval')
 const { insert_random } = require('./server/insert-random')
 const { delete_all_gamedata } = require('./server/delete-all-gamedata')
 
+app.set('trust proxy', true) // azure ada macam proxy so kena buat ni // set to true utk trust all
+
 app.use(express.json())
 app.use(limiter)
 
@@ -17,10 +19,14 @@ const loginRouter = require('./account/login')
 const word_listRouter = require('./word/edit')
 const today_wordRouter = require('./word/today')
 const gameRouter = require('./game/game')
+<<<<<<< HEAD
 const ipRouter = require('./utils/ip-route')
 =======
 const ipRouter = require('./dev/ip-route')
 >>>>>>> Stashed changes
+=======
+const ipRouter = require('./dev/ip-route')
+>>>>>>> main
 const leaderboardRouter = require('./game/leaderboard')
 
 app.use('/account', registerRouter)
@@ -35,14 +41,23 @@ app.use((req, res) => {
   res.status(200).send('home')
 })
 
-// daily_word()
-if(day_interval()) {
+// for start and just in case undefined for any reason
+if(saved_date == null) {
+
+  var saved_date = new Date()
+}
+
+// has a day passed
+if(day_interval(saved_date)) {
   
   //randomly pick a new word
   insert_random()
 
   //delete yesterday's game data
   delete_all_gamedata()
+
+  // since already one day, get change var to today's date
+  saved_date = new Date()
 }
 
 app.listen(port, () => {
