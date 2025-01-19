@@ -1,14 +1,12 @@
-function day_interval() {
+function day_interval(last_checked_date) {
 
-    var date1 = new Date()
+    var actual_date = new Date()
 
-    var date1_tomorrow = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate() + 1);
-    
-    if (date1_tomorrow.getFullYear() == date1.getFullYear() && date1_tomorrow.getMonth() == date1.getMonth() && date1_tomorrow.getDate() == date1.getDate()) {
-        return true; // date2 is one day after date1.
+    if (last_checked_date.getFullYear() == actual_date.getFullYear() && last_checked_date.getMonth() == actual_date.getMonth() && last_checked_date.getDate() == actual_date.getDate()) {
+        return false; // everything is same so still same date or same day
     }
     else {
-        return false
+        return true; // different date or day
     }
 }
 
