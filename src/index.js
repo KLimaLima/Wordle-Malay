@@ -9,19 +9,7 @@ const { day_interval } = require('./server/day-interval')
 const { insert_random } = require('./server/insert-random')
 const { delete_all_gamedata } = require('./server/delete-all-gamedata')
 
-/////////////////////////////////////////////////////////////////////////////
-
-const { ip_addr } = require('./db/client');
-
-// let proxy_num = await ip_addr.findOne(
-//   {
-//     parameter: 'proxy_num'
-//   }
-// )
-
-app.set('trust proxy', true)//proxy_num.num)
-
-/////////////////////////////////////////////////////////////////////////////
+app.set('trust proxy', true) // azure ada macam proxy so kena buat ni // set to true utk trust all
 
 app.use(express.json())
 app.use(limiter)
