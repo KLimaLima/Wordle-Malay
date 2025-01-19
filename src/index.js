@@ -19,14 +19,7 @@ const loginRouter = require('./account/login')
 const word_listRouter = require('./word/edit')
 const today_wordRouter = require('./word/today')
 const gameRouter = require('./game/game')
-<<<<<<< HEAD
-const ipRouter = require('./utils/ip-route')
-=======
 const ipRouter = require('./dev/ip-route')
->>>>>>> Stashed changes
-=======
-const ipRouter = require('./dev/ip-route')
->>>>>>> main
 const leaderboardRouter = require('./game/leaderboard')
 
 app.use('/account', registerRouter)
