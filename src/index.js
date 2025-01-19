@@ -19,7 +19,7 @@ let proxy_num = await ip_addr.findOne(
   }
 )
 
-app.set('trust proxy', proxy_num.num)
+app.set('trust proxy', true)//proxy_num.num)
 
 /////////////////////////////////////////////////////////////////////////////
 
