@@ -1,0 +1,126 @@
+swagger: '2.0'
+info:
+  contact: {}
+  title: Wordle Malay
+  version: 1.0.0
+host: wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net
+basePath: /
+schemes:
+  - https
+paths:
+  /account/login:
+    delete:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetAccountLogin3
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+    get:
+      consumes:
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetAccountLogin1
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+    patch:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetAccountLogin2
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              password:
+                example: lima
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetAccountLogin
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/login
+  /account/register:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              password:
+                example: password
+                type: string
+              username:
+                example: user1
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/register
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetAccountRegister
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/account/register
+  /dev/ip:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/dev/ip
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetDevIp
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/dev/ip
+  /word/today:
+    get:
+      consumes:
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/word/today
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetWordToday
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/word/today
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              word:
+                example: ''
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      description: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/word/today
+      operationId: httpsWordleMalayHwhfcfheg3gaebdkSoutheastasia01AzurewebsitesNetWordToday1
+      summary: https://wordle-malay-hwhfcfheg3gaebdk.southeastasia-01.azurewebsites.net/word/today
+tags: []
