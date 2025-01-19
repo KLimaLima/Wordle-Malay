@@ -20,7 +20,6 @@ const word_listRouter = require('./word/edit')
 const today_wordRouter = require('./word/today')
 const gameRouter = require('./game/game')
 const ipRouter = require('./dev/ip-route')
-const proxyNum = require('./dev/proxy-num')
 const leaderboardRouter = require('./game/leaderboard')
 
 app.use('/account', registerRouter)
@@ -29,21 +28,29 @@ app.use('/word', word_listRouter)
 app.use('/word', today_wordRouter)
 app.use('/', gameRouter)
 app.use('/', ipRouter)
-app.use('/', proxyNum)
 app.use('/', leaderboardRouter)
 
 app.use((req, res) => {
   res.status(200).send('home')
 })
 
-// daily_word()
-if(day_interval()) {
+// for start and just in case undefined for any reason
+if(saved_date == null) {
+
+  var saved_date = new Date()
+}
+
+// has a day passed
+if(day_interval(saved_date)) {
   
   //randomly pick a new word
   insert_random()
 
   //delete yesterday's game data
   delete_all_gamedata()
+
+  // since already one day, get change var to today's date
+  saved_date = new Date()
 }
 
 app.listen(port, () => {
