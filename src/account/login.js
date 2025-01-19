@@ -11,6 +11,7 @@ const { account } = require('../db/client.js');
 let { req_search } = require('../utils/req-search.js')
 let { validate_password } = require('../utils/validate-password.js')
 let { verify_jwt } = require('../utils/verify-jwt.js')
+let { enforcePasswordPolicy } = require('../utils/validate-password.js')
 
 //TODO: should implement id so that user can go account/:id or account/login/id: to do all related stuff
 // plus we can verify with jwt they give with the 
@@ -79,7 +80,7 @@ loginRouter.route('/login')
         res.status(200).send(find_one)
     })
     //for change password
-    .patch(verify_jwt, async (req, res) => {
+    .patch(verify_jwt, enforcePasswordPolicy, async (req, res) => {
 
         let { username, password, role } = req.body
 
