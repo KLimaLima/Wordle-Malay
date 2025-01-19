@@ -3,12 +3,14 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 let client = require('./db/database')
+let limiter = require('./utils/rate-limit')
 
 const { day_interval } = require('./server/day-interval')
 const { insert_random } = require('./server/insert-random')
 const { delete_all_gamedata } = require('./server/delete-all-gamedata')
 
 app.use(express.json())
+app.use(limiter)
 
 const registerRouter = require('./account/register')
 const loginRouter = require('./account/login')

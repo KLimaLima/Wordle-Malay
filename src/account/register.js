@@ -7,9 +7,10 @@ salt_rounds = 10;
 const { account } = require('../db/client.js');
 
 let { req_search } = require('../utils/req-search.js')
+let { enforcePasswordPolicy } = require('../utils/validate-password.js')
 
 registerRouter.route('/register')
-    .post(req_search, async (req, res) => {
+    .post(req_search, enforcePasswordPolicy, async (req, res) => {
 
         let { username, password } = req.body
 

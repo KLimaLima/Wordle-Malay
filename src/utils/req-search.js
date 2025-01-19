@@ -9,6 +9,7 @@ async function req_search(req, res, next) {
 
     if(!username) {
         res.status(400).send('Please provide a username')
+        return
     }
 
     let result = await account.findOne(
