@@ -3,6 +3,7 @@ const rateLimit = require('express-rate-limit');
 const requestIp = require('request-ip');
 
 const app = express();
+app.set('trust proxy', true);
 app.use(requestIp.mw());
 
 const limiter = rateLimit({
