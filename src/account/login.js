@@ -3,8 +3,10 @@ const loginRouter = express.Router();
 
 const bcrypt = require('bcrypt');
 
+require('dotenv').config();
+
 var jwt = require('jsonwebtoken');
-jwt_secret = 'nevergonnagiveyouup'
+jwt_secret = `${process.env.JWT_SECRET}`
 
 const { account } = require('../db/client.js');
 
