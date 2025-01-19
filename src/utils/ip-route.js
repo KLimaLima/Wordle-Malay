@@ -3,7 +3,7 @@ const ipRouter = express.Router();
 
 ipRouter.route('/ip')
     .get( async (req, res) => {
-        res.status(200).send(req.clientIp);
+        res.status(200).send(req.ip);
     });
 
 module.exports = ipRouter;
