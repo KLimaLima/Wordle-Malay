@@ -73,9 +73,21 @@ loginRouter.route('/login')
 
         if(username == 'all' && result_agg_player[0].role == 'admin') {
 
-            let find_all = await account.find().toArray()
+            const agg_admin = [
+                {
+                  '$project': {
+                    '_id': 0, 
+                    'password': 0
+                  }
+                }
+            ];
 
-            res.status(200).send(find_all)
+            const cursor_admin = account.aggregate(agg_admin);
+            const result_admin = await cursor_admin.toArray();
+
+            // let find_all = await account.find().toArray()
+
+            res.status(200).send(result_admin)
             return
         }
 
