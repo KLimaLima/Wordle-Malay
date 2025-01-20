@@ -60,8 +60,6 @@ loginRouter.route('/login')
 
         const cursor_player = account.aggregate(agg_player);
         const result_agg_player = await cursor_player.toArray(); 
-        console.log(result_agg_player)
-        console.log(result_agg_player[0].role)       
 
         let { username } = req.body
 
