@@ -71,7 +71,7 @@ loginRouter.route('/login')
             return
         }
 
-        if(username == 'all' && result.role == 'admin') {
+        if(username == 'all' && result_agg_player[0].role == 'admin') {
 
             let find_all = await account.find().toArray()
 
