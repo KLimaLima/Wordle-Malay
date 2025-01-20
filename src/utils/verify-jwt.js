@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-jwt_secret = 'nevergonnagiveyouup'
+jwt_secret = `${process.env.JWT_SECRET}`
 
 function verify_jwt(req, res, next) {
 
