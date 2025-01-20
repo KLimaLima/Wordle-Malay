@@ -58,17 +58,26 @@ gameRouter.route('/play')
 
         let account = res.locals.account
 
-        let user = await game_data.findOne(
+        const agg = [
             {
-                _id: account._id
+              '$match': {
+                '_id': account._id
+              }
+            }, {
+              '$project': {
+                '_id': 0
+              }
             }
-        )
+        ];
+        
+        const cursor = game_data.aggregate(agg);
+        const result = await cursor.toArray();
 
-        if(!user) {
+        if(!result) {
             res.status(200).send('You have not played yet.\nStart playing now')
         }
 
-        res.status(200).send(user)
+        res.status(200).send(result[0])
     })
     .patch(verify_jwt, jwt_search, async (req, res) => {
         res.status(204).send('Nothing here')
