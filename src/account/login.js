@@ -45,41 +45,73 @@ loginRouter.route('/login')
 
         let jwt_data = res.locals.jwt_data
 
-        let result = await account.findOne(
+        const agg_player = [
             {
-                username: jwt_data.username
+              '$match': {
+                'username': jwt_data.username
+              }
+            }, {
+              '$project': {
+                '_id': 0, 
+                'password': 0
+              }
             }
-        )
+        ];
+
+        const cursor_player = account.aggregate(agg_player);
+        const result_agg_player = await cursor_player.toArray(); 
 
         let { username } = req.body
 
         //if there is no username in req
         //basically means that the user (any role) wants self data
         //player role ONLY up to here
-        if(!username || result.role == 'player') {
-            res.status(200).send(result)
+        if(!username || result_agg_player[0].role == 'player') {
+            res.status(200).send(result_agg_player[0])
             return
         }
 
-        if(username == 'all' && result.role == 'admin') {
+        if(username == 'all' && result_agg_player[0].role == 'admin') {
 
-            let find_all = await account.find().toArray()
+            const agg_admin = [
+                {
+                  '$project': {
+                    '_id': 0, 
+                    'password': 0
+                  }
+                }
+            ];
 
-            res.status(200).send(find_all)
+            const cursor_admin = account.aggregate(agg_admin);
+            const result_admin = await cursor_admin.toArray();
+
+            // let find_all = await account.find().toArray()
+
+            res.status(200).send(result_admin)
             return
         }
 
-        let find_one = await account.findOne(
+        const agg = [
             {
-                username: username
+              '$match': {
+                'username': username
+              }
+            }, {
+              '$project': {
+                '_id': 0, 
+                'password': 0
+              }
             }
-        )
+        ];
 
-        if(!find_one) {
+        const cursor = account.aggregate(agg);
+        const result_agg = await cursor.toArray();
+
+        if(!result_agg) {
             res.status(400).send(`Could not find username ${username}`)
         }
 
-        res.status(200).send(find_one)
+        res.status(200).send(result_agg[0])
     })
     //for change password
     .patch(verify_jwt, enforcePasswordPolicy, async (req, res) => {
