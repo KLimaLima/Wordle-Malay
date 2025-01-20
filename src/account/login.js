@@ -155,7 +155,7 @@ loginRouter.route('/login')
         //first by default all will delete self
         to_delete = res.locals.jwt_data.username
 
-        //only if have username and admin change to delete selected user
+        //only if have username AND admin role change to delete selected user
         if(username && req_user.role == 'admin') {
 
             to_delete = username
