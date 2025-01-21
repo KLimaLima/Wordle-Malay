@@ -49,7 +49,10 @@ leaderboardRouter.get('/leaderboard', async(req, res) => {
         five_attempt: total_tries_5
     }
 
-    res.send(leaderboard_json)
+    console.log('REQUESTS:');
+    console.log(JSON.stringify(req.headers));
+
+    res.send(`${leaderboard_json}\n${JSON.stringify(req.headers)}`)
 })
 
 module.exports = leaderboardRouter
