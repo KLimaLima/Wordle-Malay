@@ -126,9 +126,9 @@ loginRouter.route('/login')
             }
         )
 
-        if(username && req_user.role == 'admin') {
-            account_to_change = username
-        }
+        // if(username && req_user.role == 'admin') {
+        //     account_to_change = username
+        // }
 
         let message_role_change = 'Do not share your password'
 
